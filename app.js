@@ -25,7 +25,6 @@ app.use(express.static('assets'));
 
 app.get('/api/missions/', (req, res) => {
   Mission.find().then((missions) => {
-    console.log(missions);
     res.status(200).send(missions)
   })
   .catch((err) => {
@@ -58,21 +57,21 @@ app.post('/api/missions', (req, res) => {
 });
 
 app.put('/api/missions/:id', (req, res) => {
-  // const model = req.body;
-  // const movie = Movie.findById(req.params.id)
-  //   .then((doc) => {
-  //     const updatedMovie = Object.assign(doc, model);
-  //     updatedMovie.save()
-  //     .then((doc) => {
-  //       res.status(200).send(doc);
-  //     })
-  //     .catch((err) => {
-  //       res.status(500).send(err);
-  //     })
-  //   })
-  //   .catch((err) => {
-  //     res.status(400).send(err);
-  //   })
+  const model = req.body;
+  const mission = Mission.findById(req.params.id)
+    .then((doc) => {
+      const updatedMovie = Object.assign(doc, model);
+      updatedMovie.save()
+      .then((doc) => {
+        res.status(200).send(doc);
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      })
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    })
 });
 
 // This route serves your index.html file (which

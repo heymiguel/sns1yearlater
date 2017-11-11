@@ -13,6 +13,7 @@ class Mission extends React.Component {
         // this.deleteMovie = this.deleteMovie.bind(this);
     }
     handleChange(e) {
+        console.log(e.target.value);
         this.setState({
             [e.target.name]: e.target.value,
         });
@@ -41,22 +42,23 @@ class Mission extends React.Component {
             editing: !this.state.editing,
         });
     }
-    // saveMovie(id) {
-    //     const movie = Object.assign({}, this.state);
-    //     delete movie.editing;
-    //     fetch(`/api/movies/${id}`, {
-    //         method: 'PUT',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(movie),
-    //     })
-    //     .then(() => this.props.fetchMovies())
+    saveMission(id) {
+        const mission = Object.assign({}, this.state);
+        console.log(mission);
+        delete mission.editing; // death to editing?
+        fetch(`/api/missions/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(mission),
+        })
+        .then(() => this.props.fetchMissions())
 
-    //     this.setState({
-    //         editing: false,
-    //     });
-    // }
+        this.setState({
+            editing: false,
+        });
+    }
     componentDidMount() {
         const newState = Object.assign({}, this.props, this.state); // right to left
         this.setState(newState);
@@ -71,53 +73,26 @@ class Mission extends React.Component {
                             <input
                                 onChange={this.handleChange}
                                 type="text"
-                                id="title"
-                                name="title"
-                                value={this.state.title}
+                                name="missionName"
+                                value={this.state.missionName}
                             />
                         </fieldset>
                         <fieldset>
-                            <label htmlFor="title">Year: </label>
+                            <label htmlFor="campaign">Year: </label>
                             <input
                                 onChange={this.handleChange}
                                 type="text"
-                                id="year"
-                                name="year"
-                                value={this.state.year}
+                                name="whichCampaign"
+                                value={this.state.whichCampaign}
                             />
                         </fieldset>
-                        <fieldset>
-                            <label htmlFor="poster">Poster: </label>
-                            <ReactFilestack
-                                apikey={"AwT9gpp4PQvqDYZ9Vm6Voz"}
-                                buttonText="Upload Photo"
-                                buttonClass="classname"
-                                onSuccess={this.onUploadSuccess}
-                            />
-                        </fieldset>
-                        <fieldset>
-                            <label htmlFor="poster">Director: </label>
-                            <input
-                                onChange={this.handleChange}
-                                type="text"
-                                id="director"
-                                name="director"
-                                value={this.state.director}
-                            />
-                        </fieldset>
-                        <fieldset>
-                            <label htmlFor="poster">Plot: </label>
-                            <textarea
-                                onChange={this.handleChange}
-                                name="plot"
-                                id="plot"
-                                value={this.props.plot}
-                            />
-                        </fieldset>
-                        <button onClick={() => this.saveMovie(this.props._id)}>Save Changes</button>
+                        <button onClick={() => this.saveMission(this.props._id)}>Save Changes</button>
                     </div>
                     : // from waaaaay uptown
-                    <div className="movie-summary">
+                    <div className="mission-summary">
+                        <h3>{this.props.missionName}</h3>
+                        <p>{this.props.whichCampaign}</p>
+                        <button onClick={this.editToggle}>Edit</button>
                         {/* lets just do a whole poopton of p */}
                     </div>
                 }
