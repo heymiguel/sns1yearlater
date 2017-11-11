@@ -31,7 +31,6 @@ app.get('/api/movies/', (req, res) => {
     res.status(400).send(err)
   })
 })
-//
 
 app.delete('/api/movies/:id', (req, res) => {
   const movieId = req.params.id;
