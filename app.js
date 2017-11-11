@@ -4,12 +4,12 @@ const path = require('path');
 // models && schema //
 
 const mongoose = require('mongoose');
-const Movie = require('./model.js');
+const Mission = require('./model.js');
 
 const bodyParser = require('body-parser');
 
 
-mongoose.connect('mongodb://localhost/reel');
+mongoose.connect('mongodb://localhost/sns');
 
 app.use(bodyParser.json());
 // This serves all files placed in the /public
@@ -23,55 +23,56 @@ app.use(express.static('assets'));
 // Include your own logic here (so it has precedence over the wildcard
 // route below)
 
-app.get('/api/movies/', (req, res) => {
-  Movie.find().then((movies) => {
-    res.status(200).send(movies)
+app.get('/api/missions/', (req, res) => {
+  Mission.find().then((missions) => {
+    console.log(missions);
+    res.status(200).send(missions)
   })
   .catch((err) => {
     res.status(400).send(err)
   })
 })
 
-app.delete('/api/movies/:id', (req, res) => {
-  const movieId = req.params.id;
-  Movie.remove({ _id: movieId })
-    .then((movie) => {
-      res.status(200).send(movie)
-    })
-    .catch((err) => {
-      res.status(400).send(err)
-    })
+app.delete('/api/missions/:id', (req, res) => {
+  // const movieId = req.params.id;
+  // Movie.remove({ _id: movieId })
+  // .then((movie) => {
+  //   res.status(200).send(movie)
+  // })
+  // .catch((err) => {
+  //   res.status(400).send(err)
+  // })
 })
 
-app.post('/api/movies', (req, res) => {
-  const movieModel = new Movie(); // create new instance of the model
-  const movie = Object.assign(movieModel, req.body);
+app.post('/api/missions', (req, res) => {
+  // const movieModel = new Movie(); // create new instance of the model
+  // const movie = Object.assign(movieModel, req.body);
 
-  movie.save()
-    .then((doc) => {
-      res.status(200).send(doc)
-    })
-    .catch((err) => {
-      res.status(404).send(err);
-    })
+  // movie.save()
+  //   .then((doc) => {
+  //     res.status(200).send(doc)
+  //   })
+  //   .catch((err) => {
+  //     res.status(404).send(err);
+  //   })
 });
 
-app.put('/api/movies/:id', (req, res) => {
-  const model = req.body;
-  const movie = Movie.findById(req.params.id)
-    .then((doc) => {
-      const updatedMovie = Object.assign(doc, model);
-      updatedMovie.save()
-      .then((doc) => {
-        res.status(200).send(doc);
-      })
-      .catch((err) => {
-        res.status(500).send(err);
-      })
-    })
-    .catch((err) => {
-      res.status(400).send(err);
-    })
+app.put('/api/missions/:id', (req, res) => {
+  // const model = req.body;
+  // const movie = Movie.findById(req.params.id)
+  //   .then((doc) => {
+  //     const updatedMovie = Object.assign(doc, model);
+  //     updatedMovie.save()
+  //     .then((doc) => {
+  //       res.status(200).send(doc);
+  //     })
+  //     .catch((err) => {
+  //       res.status(500).send(err);
+  //     })
+  //   })
+  //   .catch((err) => {
+  //     res.status(400).send(err);
+  //   })
 });
 
 // This route serves your index.html file (which
