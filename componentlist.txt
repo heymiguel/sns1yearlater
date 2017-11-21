@@ -1,7 +1,41 @@
-const mongoose = require('mongoose');
+component list
+login
 
-const MissionSchema = new mongoose.Schema({
-  missionName: String,
+Arc summary
+
+mission summary
+
+mission questionnaire
+
+
+
+
+index displays StoryArcs
+
+StoryArcs are made of missions
+
+
+
+
+
+models
+user
+	- user
+	- word
+	- [arcs]
+
+arc has
+	- made by / tagged to specific user
+	- [missions]
+
+mission 
+	-all the fun stuff you get to ask.
+
+
+===========  
+
+
+missionName: String,
   whichCampaign: String,
   cardinality: Number, // in sequence, which mission is this
   oneShot: Boolean, // duh.
@@ -25,7 +59,13 @@ const MissionSchema = new mongoose.Schema({
     description: String, // who operates in this area?
     knownFactions: String, // specific factions who operate here
   }
-})
+	
 
-module.exports = mongoose.model('Mission', MissionSchema);
+To which story does this belong to?
+whichCampaign
 
+TODO:
+build out the actual fucking form
+update the actual fucking form
+Add new mission
+GG

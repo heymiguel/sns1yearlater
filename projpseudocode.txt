@@ -1,0 +1,39 @@
+arc: {
+  []
+}
+
+Create new arc
+  - /api/arcs - POST
+
+Add mission to arc
+  - /api/arcs/1/add_mission - POST
+    - Arc.find(params[:id])
+    - mission = new Mission();
+    - arcs.missions.push(mission);
+    - res.send(mission);
+    - returns { _id: '3490ufei0j0wefj23' }
+
+Update mission
+  - /api/missions/:id
+
+
+- import
+data = [
+  {
+    name: 'Arc A',
+    missions: [
+      name: 'Mission 1'
+    ]
+  }
+]
+
+data.forEach(arcData => {
+  var missionIds = arc.missions.map(missionData) => {
+    var mission = new Mission(missionData);
+    mission.save();
+    return mission._id;
+  }
+  var arc = new Arc(arcData);
+  arc.missions = missionIds;
+  arc.save();
+})

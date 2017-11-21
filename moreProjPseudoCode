@@ -1,0 +1,17 @@
+ArcSchema: a
+  [missions] 1
+  user
+
+ArcSchema b
+  [missions] 1
+
+User:
+  
+
+With missions array:
+
+Arc.find().populate('missions')
+
+With arc on missions
+/arcs/1
+/arcs/1/missions

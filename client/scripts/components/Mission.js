@@ -42,9 +42,13 @@ class Mission extends React.Component {
             editing: !this.state.editing,
         });
     }
+
+    addMission(){
+        // create blank mission with empty data.
+        // with the exception of one field, just so we 
+    }
     saveMission(id) {
         const mission = Object.assign({}, this.state);
-        console.log(mission);
         delete mission.editing; // death to editing?
         fetch(`/api/missions/${id}`, {
             method: 'PUT',
@@ -93,7 +97,7 @@ class Mission extends React.Component {
                         <h3>{this.props.missionName}</h3>
                         <p>{this.props.whichCampaign}</p>
                         <button onClick={this.editToggle}>Edit</button>
-                        {/* lets just do a whole poopton of p */}
+                        {/* lets just do a whole lotta of p */}
                     </div>
                 }
             </div>

@@ -6,14 +6,16 @@ class Form extends React.Component {
     constructor() {
         super();
         this.state = {
-            title: '',
-            director: '',
-            year: '',
-            plot: '',
-            posterUrl: '',
+            arcs: [],
+            missions: [],
+            arcName: '',
+            missionName: '',
+            theName: '',
         };
+        this.createArc = this.createArc.bind(this);
+        this.createMission = this.createMission.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
         this.onUploadSuccess = this.onUploadSuccess.bind(this);
     }
     handleChange(e) {
@@ -27,38 +29,54 @@ class Form extends React.Component {
             posterUrl: url,
         });
     }
-    handleSubmit(e) {
+    createArc(e) {
+        console.log("arc");
         e.preventDefault();
-        const movie = Object.assign({}, this.state); // again right to left
-        fetch('/api/movies', {
+        const arc = Object.assign({}, this.state); // again right to left
+        fetch('/api/arcs', {
             method: 'POST',
-            body: JSON.stringify(movie),
+            body: JSON.stringify(arc),
             headers: {
                 'content-type': 'application/json'
             }
         })
-            .then(() => this.props.fetchMovies());
+        .then(() => this.props.fetchMissions());
+    }
+    createMission(e) {
+        e.preventDefault();
+        const mission = Object.assign({}, this.state); // again right to left
+        fetch('/api/missions', {
+            method: 'POST',
+            body: JSON.stringify(mission),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+        // .then(() => this.props.fetchMissions());
     }
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <div className="form-row">
-                    <input onChange={this.handleChange} name="title" type="text" placeholder="Enter movie name" value={this.state.title} />
-                    <ReactFilestack
-                        apikey={"AwT9gpp4PQvqDYZ9Vm6Voz"}
-                        buttonText="Upload Poster"
-                        onSuccess={this.onUploadSuccess}
-                    />
-                    <input onChange={this.handleChange} name="year" type="number" placeholder="Enter movie year" value={this.state.year} />
-                    <input onChange={this.handleChange} name="director" type="text" placeholder="Enter movie director" value={this.state.director} />
-                </div>
-                <div className="form-row">
-                    <textarea onChange={this.handleChange} name="plot" type="text" placeholder="Enter movie plot" value={this.state.plot} />
-                </div>
-                <div className="form-row">
-                    <button>Add Movie</button>
-                </div>
-            </form>
+            <div>
+                <form onSubmit={this.createArc}>
+                    <div className="form-row">
+                        <input onChange={this.handleChange} name="arcName" type="text" placeholder="Enter arc name" value={this.state.arcName} />
+                    </div>
+                    <div className="form-row">
+                        <button>create arc</button>
+                    </div>
+                </form>
+                <form onSubmit={this.createMission}>
+                    <div className="form-row">
+                        <input onChange={this.handleChange} name="missionName" type="text" placeholder="Enter missionName" value={this.state.missionName} />
+                    </div>
+                    <div className="form-row">
+                        <p>placeholder for a thing that pulls all available arcs</p>
+                    </div>
+                    <div className="form-row">
+                        <button>create mission</button>
+                    </div>
+                </form>
+            </div>
         );
     }
 }

@@ -4,7 +4,8 @@ const path = require('path');
 // models && schema //
 
 const mongoose = require('mongoose');
-const Mission = require('./model.js');
+const Mission = require('./missionModel.js');
+const Arc = require('./arcModel.js');
 
 const bodyParser = require('body-parser');
 
@@ -43,17 +44,42 @@ app.delete('/api/missions/:id', (req, res) => {
   // })
 })
 
-app.post('/api/missions', (req, res) => {
-  // const movieModel = new Movie(); // create new instance of the model
-  // const movie = Object.assign(movieModel, req.body);
+app.get('/api/arcs/', (req, res) => {
+  Arc.find().then((arcs) => {
+    res.status(200).send(arcs)
+  })
+  .catch((err) => {
+    res.status(400).send(err)
+  })
+})
 
-  // movie.save()
-  //   .then((doc) => {
-  //     res.status(200).send(doc)
-  //   })
-  //   .catch((err) => {
-  //     res.status(404).send(err);
-  //   })
+app.post('/api/arcs', (req, res)=>{
+  console.log(req.body)
+  const arcModel = new Arc();
+  const arc = Object.assign(arcModel, req.body);
+
+  arc.save()
+    .then((doc)=>{
+      res.status(200).send(doc)
+      console.log(doc)
+    })
+    .catch((err)=>{
+      res.status(404).send(err)
+      console.log(err)
+    });
+});
+
+app.post('/api/missions', (req, res) => {
+  const missionModel = new Mission(); // create new instance of the model
+  const mission = Object.assign(missionModel, req.body);
+
+  mission.save()
+    .then((doc) => {
+      res.status(200).send(doc)
+    })
+    .catch((err) => {
+      res.status(404).send(err);
+    })
 });
 
 app.put('/api/missions/:id', (req, res) => {
