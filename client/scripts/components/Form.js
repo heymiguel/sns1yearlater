@@ -11,13 +11,16 @@ class Form extends React.Component {
             arcName: '',
             missionName: '',
             theName: '',
+            whichArc: '',
         };
         this.createArc = this.createArc.bind(this);
         this.createMission = this.createMission.bind(this);
         this.handleChange = this.handleChange.bind(this);
         // this.handleSubmit = this.handleSubmit.bind(this);
         this.onUploadSuccess = this.onUploadSuccess.bind(this);
+        this._selectArc = this._selectArc.bind(this);
     }
+
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
@@ -28,6 +31,15 @@ class Form extends React.Component {
         this.setState({
             posterUrl: url,
         });
+    }
+
+    _selectArc(arc){
+        let {whichArc} = this.state;
+        this.setState({
+            whichArc: arc
+        }, ()=>{
+            console.log(this.state.whichArc);
+        })
     }
     createArc(e) {
         console.log("arc");
@@ -70,12 +82,23 @@ class Form extends React.Component {
                         <input onChange={this.handleChange} name="missionName" type="text" placeholder="Enter missionName" value={this.state.missionName} />
                     </div>
                     <div className="form-row">
-                        <p>placeholder for a thing that pulls all available arcs</p>
+                        <div className="arclist">
+                            <input type="hidden" name="whichArc" value={this.state.whichArc}/>
+                            <ul>
+                                {this.props.availableArcs.map( arc => {
+                                    return <li key={arc._id} 
+                                            onClick={ () => this._selectArc(arc._id) } > 
+                                                {arc.name}
+                                            </li>
+                                })}
+                            </ul>
+                        </div>
                     </div>
                     <div className="form-row">
                         <button>create mission</button>
                     </div>
                 </form>
+                
             </div>
         );
     }

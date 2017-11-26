@@ -83,7 +83,7 @@ class Mission extends React.Component {
                         </fieldset>
                         <fieldset>
                             <label htmlFor="campaign">Year: </label>
-                            <input
+                            <input  
                                 onChange={this.handleChange}
                                 type="text"
                                 name="whichCampaign"
@@ -96,8 +96,8 @@ class Mission extends React.Component {
                     <div className="mission-summary">
                         <h3>{this.props.missionName}</h3>
                         <p>{this.props.whichCampaign}</p>
-                        <button onClick={this.editToggle}>Edit</button>
                         {/* lets just do a whole lotta of p */}
+                        <button onClick={this.editToggle}>Edit</button>
                     </div>
                 }
             </div>

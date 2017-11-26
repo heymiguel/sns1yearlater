@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const MissionSchema = new mongoose.Schema({
   missionName: { type: String, required: true },
-  // whichCampaign: { type: String, required: true}, 
+  whichArc: { type: mongoose.Schema.Types.ObjectId, required: true}, 
   // this needs to be a schema
   // how to send along the arcname
   cardinality: { type: Number, default: 1 }, // in sequence, which mission is this

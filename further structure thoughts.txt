@@ -9,8 +9,9 @@ USERS
 
 <after login>
 
-tonight
+next steps
+Pull arcs into the form component? (ugh selects)
 
-a route that returns arcs
-a route that let me make an arc
+
+
 

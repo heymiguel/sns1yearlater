@@ -42,7 +42,7 @@ class App extends React.Component {
             <div>
                 <header>
                     <h1>????</h1>
-                    <Form fetchMissions={this.fetchMissions} />
+                    <Form fetchMissions={this.fetchMissions} fetchArcs={this.fetchArcs} availableArcs={this.state.arcs}/>
                 </header>
                 <MissionList fetchMissions={this.fetchMissions} missions={this.state.missions.reverse()} />
             </div>
