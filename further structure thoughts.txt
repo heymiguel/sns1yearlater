@@ -10,8 +10,49 @@ USERS
 <after login>
 
 next steps
-Pull arcs into the form component? (ugh selects)
 
 
+
+Routes
+
+/, /login
+
+— the login
+
+/welcome
+
+hello user
+edit specific arc
+create new arc
+
+
+/arcs
+
+
+
+- show all arcs
+  - arc bar is summary, show overall difficulty 
+- should also show available missions, when user asks for a particular arc (on click?) 
+
+/createarc
+
+- create arc
+
+/createmission
+
+- create mission 
+
+
+
+
+
+for final project
+auth 
+ - login logout
+List missions
+edit missions
+add missions to arc
+list arc
+arc summary
 
 

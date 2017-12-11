@@ -19,6 +19,27 @@ class Form extends React.Component {
         // this.handleSubmit = this.handleSubmit.bind(this);
         this.onUploadSuccess = this.onUploadSuccess.bind(this);
         this._selectArc = this._selectArc.bind(this);
+        this.refresh = this.refresh.bind(this);
+    }
+
+    componentWillMount() {
+        if (this.props.author) {
+            this.refresh();    
+        }
+        
+    }
+    
+    refresh() {
+    
+        // 1. Fetch all the exist user notes by a user's ID
+        fetch(`/api/arcs/${this.props.author._id}`, { credentials: 'include'})
+        .then((res) => res.json())
+        .then((arcs) => {
+            // 2. Store them in the state
+            this.setState({
+                arcs,
+            });
+        });
     }
 
     handleChange(e) {
@@ -45,6 +66,7 @@ class Form extends React.Component {
         console.log("arc");
         e.preventDefault();
         const arc = Object.assign({}, this.state); // again right to left
+        arc.author = this.props.author._id;
         fetch('/api/arcs', {
             method: 'POST',
             body: JSON.stringify(arc),
@@ -77,6 +99,9 @@ class Form extends React.Component {
                         <button>create arc</button>
                     </div>
                 </form>
+                <div>
+                    {/* list all arcs by a specific user */}
+                </div>
                 <form onSubmit={this.createMission}>
                     <div className="form-row">
                         <input onChange={this.handleChange} name="missionName" type="text" placeholder="Enter missionName" value={this.state.missionName} />
@@ -85,10 +110,10 @@ class Form extends React.Component {
                         <div className="arclist">
                             <input type="hidden" name="whichArc" value={this.state.whichArc}/>
                             <ul>
-                                {this.props.availableArcs.map( arc => {
+                                {this.state.arcs.map( arc => {
                                     return <li key={arc._id} 
                                             onClick={ () => this._selectArc(arc._id) } > 
-                                                {arc.name}
+                                                {arc.arcName}
                                             </li>
                                 })}
                             </ul>

@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
-const arc = require('./arcModel');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const UserSchema = new mongoose.Schema({
-  user: String,
-  password: String,
-  arcs: [arc],
+  name: String,
+  email: String
 });
+
+UserSchema.plugin(passportLocalMongoose,  {usernameField:'email'});
 
 module.exports = mongoose.model('User', UserSchema);
