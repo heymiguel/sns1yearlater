@@ -126,6 +126,16 @@ app.get('/api/arcs/:user_id', (req, res) => {
     });
 });
 
+app.get('/api/missions/:arc_id', (req, res) => {
+  Mission.find({ whichArc: req.params.arc_id })
+    .then((doc) => {
+      res.status(200).send(doc);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
+
 app.post('/api/arcs', (req, res)=>{
   console.log(req.body)
   const arcModel = new Arc();

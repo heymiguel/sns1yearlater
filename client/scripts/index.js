@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import MissionList from './components/MissionList';
-import Form from './components/Form';
+import ArcManagement from './components/ArcManagement';
 import CreateUser from './components/CreateUser';
 import Login from './components/Login';
 import { BrowserRouter as Router, 
@@ -89,7 +89,7 @@ class App extends React.Component {
                                     render={ () => (
                                         this.state.loggedIn 
                                         ?
-                                            <Redirect to="/missionmanagement"/>
+                                            <Redirect to="/arcs"/>
                                         :
                                             <div>
                                                 <CreateUser refresh={this.refresh} />
@@ -99,9 +99,14 @@ class App extends React.Component {
                                     )}
                                         
                                 />
-                                <Route path="/missionmanagement" 
+                                <Route exact path="/arcs" 
                                     render={ 
-                                        ()=>  <Form fetchMissions={this.fetchMissions} fetchArcs={this.fetchArcs} availableArcs={this.state.arcs} author={this.state.user}/>
+                                        ()=>  <ArcManagement fetchMissions={this.fetchMissions} fetchArcs={this.fetchArcs} availableArcs={this.state.arcs} author={this.state.user}/>
+                                    }
+                                />
+                                <Route exact path="/createmission"
+                                    render={
+                                        ()=> <p> Create Missions </p>
                                     }
                                 />
                             </div>
