@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import MissionList from './components/MissionList';
 import ArcManagement from './components/ArcManagement';
 import CreateUser from './components/CreateUser';
+import CreateMission from './components/CreateMission'
 import Login from './components/Login';
 import { BrowserRouter as Router, 
     Route, Link, Redirect } from 'react-router-dom';
@@ -18,6 +19,7 @@ class App extends React.Component {
         }
         this.fetchMissions = this.fetchMissions.bind(this);
         this.fetchArcs = this.fetchArcs.bind(this);
+        this.fetchUserArcs = this.fetchUserArcs.bind(this);
         this.logout = this.logout.bind(this);
         this.refresh = this.refresh.bind(this);
     }
@@ -26,6 +28,8 @@ class App extends React.Component {
         this.fetchMissions();
         this.fetchArcs();
         this.refresh();
+
+        // get arcs by ID here, pass down to child
     }
     login() {
         this.setState({
@@ -44,6 +48,7 @@ class App extends React.Component {
                     user: user,
                 });
                this.login();            
+               return true;
             }
         });
     }
@@ -77,7 +82,17 @@ class App extends React.Component {
         }));
     }
 
-
+    fetchUserArcs() {
+            // 1. Fetch all the exist user arcs by a user's ID
+            fetch(`/api/arcs/${this.state.user._id}`, { credentials: 'include'})
+            .then((res) => res.json())
+            .then((arcs) => {
+                // 2. Store them in the state
+                this.setState({
+                    arcs,
+                });
+            });
+        }
 
     render() {
         return (
@@ -101,12 +116,12 @@ class App extends React.Component {
                                 />
                                 <Route exact path="/arcs" 
                                     render={ 
-                                        ()=>  <ArcManagement fetchMissions={this.fetchMissions} fetchArcs={this.fetchArcs} availableArcs={this.state.arcs} author={this.state.user}/>
+                                        ()=>  <ArcManagement fetchMissions={this.fetchMissions} fetchArcs={this.fetchArcs} fetchUserArcs={this.fetchUserArcs} arcs={this.state.arcs}  refresh={this.refresh} author={this.state.user}/>
                                     }
                                 />
                                 <Route exact path="/createmission"
                                     render={
-                                        ()=> <p> Create Missions </p>
+                                        ()=> <CreateMission refresh={this.refresh} loggedIn={this.state.loggedIn} fetchMissions={this.fetchMissions} author={this.state.user} />
                                     }
                                 />
                             </div>

@@ -26,6 +26,10 @@ class ArcManagement extends React.Component {
         this._toggleArcCreation = this._toggleArcCreation.bind(this);
     }
 
+    componentDidMount() {
+        this.props.refresh();
+    }
+    
     componentWillMount() {
         if (this.props.author) {
             this.fetchArcs();    
@@ -180,12 +184,12 @@ class ArcManagement extends React.Component {
                                         <ul>
                                             <MissionList missions={this.state.missions} />
                                         </ul>
-                                        <a href="/createmission">Add New Mission</a>
                                     </div>   
                                 </div>
                             )}
                             
                             <button onClick={(e)=>this._toggleArcCreation(e)}>Create New Arc</button>
+                            <a href="/createmission">Add New Mission</a>
                         </div>  
                     }
                 </div> 

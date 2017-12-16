@@ -169,8 +169,8 @@ app.put('/api/missions/:id', (req, res) => {
   const model = req.body;
   const mission = Mission.findById(req.params.id)
     .then((doc) => {
-      const updatedMovie = Object.assign(doc, model);
-      updatedMovie.save()
+      const updatedMission = Object.assign(doc, model);
+      updatedMission.save()
       .then((doc) => {
         res.status(200).send(doc);
       })

@@ -23,6 +23,7 @@
     "passport-local-mongoose": "^4.4.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-radio-buttons": "^1.2.1",
     "react-router-dom": "^4.2.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"

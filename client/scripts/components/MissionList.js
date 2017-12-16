@@ -7,6 +7,7 @@ const MissionList = (props) => {
             <ul>
                {props.missions.map(mission => <li key={mission._id}> <Mission arcId={mission.whichArc} fetchMissions={props.fetchMissions} {...mission} /> </li>)} 
             </ul>
+            
         </div>
         
     );
