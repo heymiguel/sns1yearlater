@@ -101,7 +101,7 @@ class App extends React.Component {
                         <Router>
                             <div>
                                 {this.state.loggedIn && (
-                                    <Link to="/api/logout" replace>logout </Link>
+                                    <Link className="logout" to="/api/logout" replace>logout </Link>
                                 )}
                                 <Route exact path="/" 
                                     render={ () => (

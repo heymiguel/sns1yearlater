@@ -109,10 +109,11 @@ class ArcManagement extends React.Component {
         });
     }
 
-    _selectArc(arc){
+    _selectArc(arc, arcName){
         let {whichArc} = this.state;
         this.setState({
-            whichArc: arc
+            whichArc: arc,
+            arcName: arcName,
         }, ()=>{
             this.fetchMissionsByArc(arc)
         })
@@ -152,14 +153,11 @@ class ArcManagement extends React.Component {
     }
     render() {
         return (
-            <div>
-                <div className="arc-management">
-                    <h3>Arc Selection</h3>
-                </div>
-                
+            <div className="arc-management">
+                <h3>Arc Selection</h3>
                 <div>
                     {this.state.isCreatingNewArc ? 
-                        <form onSubmit={this.createArc}>
+                        <form className="create-arc-form" onSubmit={this.createArc}>
                             <div className="form-row">
                                 <input onChange={this.handleChange} name="arcName" type="text" placeholder="Enter arc name" value={this.state.arcName} />
                             </div>
@@ -177,26 +175,34 @@ class ArcManagement extends React.Component {
                             <ul>
                                 {this.state.arcs.map( arc => {
                                     return <li key={arc._id} 
-                                            onClick={ () => this._selectArc(arc._id) } > 
-                                                <strong>{arc.arcName}</strong>
-                                                <p>{arc.arcDescription}</p>
-                                                {/* <a href="" onClick={ (e) => this._editArc(arc._id, e)} >Edit</a> */}
+                                            onClick={ () => this._selectArc(arc._id, arc.arcName) } > 
+                                                <div className="arc-header">
+                                                    <div className="arc-description">
+                                                        <h3>{arc.arcName}</h3>
+                                                        <p>{arc.arcDescription}</p>
+                                                    </div>
+                                                    {/* <img src="https://picsum.photos/200/100/?random" alt=""/> */}
+                                                    {/* <a href="" onClick={ (e) => this._editArc(arc._id, e)} >Edit</a> */}
+                                                </div>
                                             </li>
                                 })}
+                                <li className="create-arc" onClick={(e)=>this._toggleArcCreation(e)}>
+                                    <p>Create New Arc</p>
+                                </li>
                             </ul>
+                            
                             {/* missionList */}
                             {(this.state.missions.length > 0) && (
-                                <div className="arc-detail">
+                                <div className="mission-list">
+                                    <h3>{this.state.arcName}</h3>
                                     <div className="existing-missions">
-                                        <ul>
-                                            <MissionList missions={this.state.missions} />
-                                        </ul>
+                                        <MissionList missions={this.state.missions} />
                                     </div>   
                                 </div>
                             )}
                             
-                            <button onClick={(e)=>this._toggleArcCreation(e)}>Create New Arc</button>
-                            <a href="/createmission">Add New Mission</a>
+                            
+                            
                         </div>  
                     }
                 </div> 

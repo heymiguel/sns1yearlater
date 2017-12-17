@@ -12,15 +12,21 @@ h1,h2,h3,h4,h5,h6{
     font-family: 'Rubik', sans-serif;
     text-transform: uppercase;
     font-weight: normal;
+    margin:0;
+}
+
+p{
+    margin: 0;
 }
 
 body{
     background: #1e1e1e;
     color: #b5b5b5;
     font-family: 'Rubik', sans-serif;
+    position: relative;
 }
 
-input{
+input, textarea{
     background: #282828;
     padding: 5px;
     border: none;
@@ -37,9 +43,9 @@ button{
     font-family: 'Rubik', sans-serif;
     border: none;
     color: #b5b5b5;
-    width: 100px;
     padding: 5px;
     text-align: center;
+    margin-right: 10px;
     // add triangle later
 }
 
@@ -54,6 +60,22 @@ a{
     &:active{
         color: #b5b5b5;
     }
+
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    list-style: none;
+}
+
+.logout{
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
 .field{
@@ -75,16 +97,105 @@ a{
         border-bottom: 2px solid #b5b5b5;
     }
     form{
-        
+        margin-top: 20px;
     }
     a{
         font-size: 8px;
     }
 }
-.arclist{
-    li {
-        display: inline-block;
-        min-width: 200px;
+
+.arc-management{
+    h3{
+        width: 40%;
+        border-bottom: 2px solid #b5b5b5;
+        margin-bottom: 15px;
+        font-size: 22px;
     }
 }
 
+.arc-list{
+    ul{
+        display: flex;
+
+        li {
+            width: 35%;
+            list-style: none;
+            background-color: #dee1e5;
+            margin-right: 5px;
+        }
+
+    }
+
+    
+
+    .arc-header{
+        display: flex;
+        justify-content: space-between;
+        background-color: #dee1e5;
+        background-image: url("https://picsum.photos/150/100/?random");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+        padding: 15px;
+    }
+    .arc-description{
+        width: 100px;
+        color: #000000;
+        h3{
+            min-width: 250px;
+            padding: 5px;
+            background: #b5b5b5;
+        }
+        p{
+            
+        }
+    }
+
+    .create-arc{
+        background: #1e1e1e;
+        border: 2px solid #b5b5b5;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .create-arc-form{
+        button{
+            margin-right: 10px;
+        }
+    }
+
+    .existing-missions{
+        margin-top: 15px;
+        .mission-list{
+            
+        }
+        .add-new-mission{
+            background: #1e1e1e;
+            color: #b5b5b5;
+            border: 2px solid #b5b5b5;
+            a{
+                font-size: 14px;
+            }
+        }   
+    }
+
+    .mission-list{
+        margin-top: 20px;
+        ul{
+            flex-direction: column;
+
+        }
+        h3{
+            font-size: 18px;
+            border: none;
+        }
+        li{
+            display: block;
+            background-color: #b5b5b5;
+            color: #000000;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+    }
+}

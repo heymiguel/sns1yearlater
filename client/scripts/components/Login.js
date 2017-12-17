@@ -61,7 +61,7 @@ class LoginUser extends React.Component {
                         value={this.state.password}
                         onChange={this.handleChange}
                     />
-                    <button>Login User</button>
+                    <button>Login</button>
                 </form>
             </div>
         );
