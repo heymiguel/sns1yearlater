@@ -44,20 +44,20 @@ class LoginUser extends React.Component {
     }
     render() {
         return (
-            <div>
-                <h2>Login User</h2>
+            <div className="login">
+                <h1>Redacted</h1>
                 <form onSubmit={this.handleSubmit}>
                     <Field
                         type="email"
                         name="email"
-                        label="Enter your email: "
+                        label="U"
                         value={this.state.email}
                         onChange={this.handleChange}
                     />
                     <Field
                         type="password"
                         name="password"
-                        label="Enter your password: "
+                        label="P"
                         value={this.state.password}
                         onChange={this.handleChange}
                     />

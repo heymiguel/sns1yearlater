@@ -392,6 +392,66 @@ template {
 *, *:before, *:after {
   box-sizing: border-box; }
 
+main {
+  max-width: 1100px;
+  padding: 20px; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Rubik', sans-serif;
+  text-transform: uppercase;
+  font-weight: normal; }
+
+body {
+  background: #1e1e1e;
+  color: #b5b5b5;
+  font-family: 'Rubik', sans-serif; }
+
+input {
+  background: #282828;
+  padding: 5px;
+  border: none;
+  color: #b5b5b5;
+  font-family: 'Rokkitt', serif; }
+
+input[type="password"] {
+  font-family: 'Rokkitt', serif; }
+
+button {
+  background: #aa0025;
+  font-family: 'Rubik', sans-serif;
+  border: none;
+  color: #b5b5b5;
+  width: 100px;
+  padding: 5px;
+  text-align: center; }
+
+a {
+  font-family: 'Rubik', sans-serif;
+  color: #b5b5b5;
+  font-size: 8px;
+  text-decoration: none; }
+  a:visited {
+    color: #b5b5b5; }
+  a:active {
+    color: #b5b5b5; }
+
+.field {
+  margin-bottom: 10px; }
+  .field label {
+    min-width: 20px; }
+  .field input {
+    margin-left: 10px;
+    min-width: 35%; }
+
+.login h1 {
+  font-size: 22px;
+  width: 200px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #b5b5b5; }
+
+.login a {
+  font-size: 8px; }
+
 .arclist li {
   display: inline-block;
   min-width: 200px; }

@@ -100,19 +100,30 @@ class App extends React.Component {
                     <main> 
                         <Router>
                             <div>
+                                {this.state.loggedIn && (
+                                    <Link to="/api/logout" replace>logout </Link>
+                                )}
                                 <Route exact path="/" 
                                     render={ () => (
                                         this.state.loggedIn 
                                         ?
                                             <Redirect to="/arcs"/>
-                                        :
-                                            <div>
+                                        :    
+                                        <div>
+                                            <Login refresh={this.refresh} />
+                                            <Link to="/createuser" replace> create an account </Link>
+                                        </div>
+                                    )}  
+                                />
+                                <Route exact path="/createuser"
+                                    render ={()=>
+                                        (
+                                            this.state.loggedIn ?
+                                                <Redirect to="/arcs"/>
+                                            :
                                                 <CreateUser refresh={this.refresh} />
-                                                <Login refresh={this.refresh} />
-                                            </div>
-                                        
-                                    )}
-                                        
+                                        )
+                                    }
                                 />
                                 <Route exact path="/arcs" 
                                     render={ 
