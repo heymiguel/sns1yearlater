@@ -1,4 +1,5 @@
 import React from 'react';
+import DifficultySelector from './DifficultySelector';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import ReactFilestack from 'filestack-react';
 
@@ -197,6 +198,12 @@ class CreateMission extends React.Component {
                               name="description"
                             value={this.state.theatre.description}
                           />
+                        <label htmlFor="size">Size </label>
+                        <DifficultySelector 
+                          levels={[0,1,2,3,4,5,6,7,8]}
+                          selectorName="theatre-size"
+                          changeHandler={this.handleTheatreChange}
+                        />
                       </fieldset>
                       <fieldset className="the-sheep">
                         

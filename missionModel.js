@@ -8,7 +8,7 @@ const MissionSchema = new mongoose.Schema({
   oneShot: { type: Boolean, default: false }, // duh.
   theatre:{
     description: { type: String, default: ' ' }, // overall thematic description. Fluff.
-    size: { type: String, default: 1 }, // (town, city, country, nation, international, world)
+    size: { type: Number, default: 1 }, // (town, city, country, nation, international, world)
     accessDescription: { type: String, default: ' ' },
     easeOfAccess: { type: Number, default: 3 }, // low is hard to access, high is easy to access
     socialDescription: { type: String, default: ' ' },
