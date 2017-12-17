@@ -19,11 +19,11 @@ const MissionSchema = new mongoose.Schema({
     economicSituation: { type: String, default: '  ' }, // low is destitute, high is affluent
   },
   theSheep: {
-    description: { type: String, default: ' ' }, // how aware is the civi pop of espionage.
+    sheepDescription: { type: String, default: ' ' }, // how aware is the civi pop of espionage.
     moodTowardsEspionage: { type: Number, default: 3 }, // low is dont care high is pretty paranoid.
   },
   theWolves: {
-    description: { type: String, default: '  ' }, // who operates in this area?
+    wolvesDescription: { type: String, default: '  ' }, // who operates in this area?
     knownFactions: { type: String, default: '  ' }, // specific factions who operate here
   }
 })

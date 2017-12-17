@@ -35,24 +35,24 @@ class CreateMission extends React.Component {
         });
     }
     handleTheatreChange(e){
+      let theatre = Object.assign({},this.state.theatre);
+      theatre[e.target.name] = e.target.value
       this.setState({
-        theatre:{
-          [e.target.name]: e.target.value,
-        }
+        theatre: theatre
       })
     }
     handleSheepChange(e){
+      let theSheep = Object.assign({},this.state.theSheep);
+      theSheep[e.target.name] = e.target.value
       this.setState({
-        theSheep:{
-          [e.target.name]: e.target.value,
-        }
+        theSheep: theSheep
       })
     }
     handleWolvesChange(e){
+      let theWolves = Object.assign({},this.state.theWolves);
+      theWolves[e.target.name] = e.target.value
       this.setState({
-        theWolves:{
-          [e.target.name]: e.target.value,
-        }
+        theWolves: theWolves
       })
     }
 
@@ -97,6 +97,7 @@ class CreateMission extends React.Component {
 
     addMission(){
         const mission = Object.assign({}, this.state);
+        debugger;
         fetch(`/api/missions/`, {
             method: 'POST',
             headers: {
@@ -192,24 +193,94 @@ class CreateMission extends React.Component {
                       </fieldset>
                       <fieldset className="theatre">
                         <label htmlFor="description">Description </label>
-                          <input
+                          <textarea
                               onChange={this.handleTheatreChange}
                               type="text"
                               name="description"
                             value={this.state.theatre.description}
                           />
-                        <label htmlFor="size">Size </label>
                         <DifficultySelector 
                           levels={[0,1,2,3,4,5,6,7,8]}
-                          selectorName="theatre-size"
+                          selectorName="size"
                           changeHandler={this.handleTheatreChange}
+                          selectorDescription={"this is a description"}
+                        />
+                        <label htmlFor="accessDescription">accessDescription </label>
+                          <textarea
+                              onChange={this.handleTheatreChange}
+                              type="text"
+                              name="accessDescription"
+                            value={this.state.theatre.accessDescription}
+                          />
+                        <DifficultySelector 
+                          levels={[0,1,2,3,4,5,6,7,8]}
+                          selectorName="easeOfAccess"
+                          changeHandler={this.handleTheatreChange}
+                          selectorDescription={"this is easeOfAccess"}
+                        />
+                        <label htmlFor="socialDescription">socialDescription </label>
+                          <textarea
+                              onChange={this.handleTheatreChange}
+                              type="text"
+                              name="socialDescription"
+                            value={this.state.theatre.socialDescription}
+                          />
+                        <DifficultySelector 
+                          levels={[0,1,2,3,4,5,6,7,8]}
+                          selectorName="socialStability"
+                          changeHandler={this.handleTheatreChange}
+                          selectorDescription={"this is socialStability"}
+                        />
+                        <label htmlFor="govermentDescription">govermentDescription </label>
+                          <textarea
+                              onChange={this.handleTheatreChange}
+                              type="text"
+                              name="govermentDescription"
+                            value={this.state.theatre.govermentDescription}
+                          />
+                        <DifficultySelector 
+                          levels={[0,1,2,3,4,5,6,7,8]}
+                          selectorName="governmentStability"
+                          changeHandler={this.handleTheatreChange}
+                          selectorDescription={"this is governmentStability"}
+                        />
+                        <label htmlFor="economicDescription">economicDescription </label>
+                          <textarea
+                              onChange={this.handleTheatreChange}
+                              type="text"
+                              name="economicDescription"
+                            value={this.state.theatre.economicDescription}
+                          />
+                        <DifficultySelector 
+                          levels={[0,1,2,3,4,5,6,7,8]}
+                          selectorName="economicSituation"
+                          changeHandler={this.handleTheatreChange}
+                          selectorDescription={"this is economicSituation"}
                         />
                       </fieldset>
                       <fieldset className="the-sheep">
-                        
+                       <label htmlFor="sheepDescription">sheep description </label>
+                          <textarea
+                              onChange={this.handleSheepChange}
+                              type="text"
+                              name="sheepDescription"
+                            value={this.state.theSheep.description}
+                          />
+                        <DifficultySelector 
+                          levels={[0,1,2,3,4,5,6,7,8]}
+                          selectorName="moodTowardsEspionage"
+                          changeHandler={this.handleSheepChange}
+                          selectorDescription={"this is moodTowardsEspionage"}
+                        />
                       </fieldset>
                       <fieldset className="the-wolves">
-                        
+                        <textarea
+                                onChange={this.handleWolvesChange}
+                                type="text"
+                                name="wolvesDescription"
+                              value={this.state.theWolves.description}
+                            />
+                        {/* insert faction component / factions here */}
                       </fieldset>
                       
                       
