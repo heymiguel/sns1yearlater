@@ -166,7 +166,7 @@ class CreateMission extends React.Component {
                                 /> 
                                 <label htmlFor={`${index}-arc`}>{arc.arcName}</label>
                                 {/* show mission difficulty here */}
-                                {/* show number of missions here */}
+                                {/* show number of missions here */   }
                               </div>
                           )
                         })}  
