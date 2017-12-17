@@ -7,24 +7,55 @@ class CreateMission extends React.Component {
         super();
         this.state = {
             editing: false,
+            theatre: {
 
+            },
+            theSheep:{
+
+            },
+            theWolves:{
+
+            }
         }
         this.editToggle = this.editToggle.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleTheatreChange = this.handleTheatreChange.bind(this);
+        this.handleSheepChange = this.handleSheepChange.bind(this);
+        this.handleWolvesChange = this.handleWolvesChange.bind(this);
         this.onUploadSuccess = this.onUploadSuccess.bind(this);
         this._setArc = this._setArc.bind(this);
         this.fetchArcs = this.fetchArcs.bind(this);
+        this.fetchMissionsByArc = this.fetchMissionsByArc.bind(this);
         // this.deleteMovie = this.deleteMovie.bind(this);
     }
     handleChange(e) {
-        console.log(e.target.value);
         this.setState({
             [e.target.name]: e.target.value,
         });
     }
+    handleTheatreChange(e){
+      this.setState({
+        theatre:{
+          [e.target.name]: e.target.value,
+        }
+      })
+    }
+    handleSheepChange(e){
+      this.setState({
+        theSheep:{
+          [e.target.name]: e.target.value,
+        }
+      })
+    }
+    handleWolvesChange(e){
+      this.setState({
+        theWolves:{
+          [e.target.name]: e.target.value,
+        }
+      })
+    }
 
     fetchArcs() {
-      
           // 1. Fetch all the exist user notes by a user's ID
           fetch(`/api/arcs/${this.props.author._id}`, { credentials: 'include'})
           .then((res) => res.json())
@@ -36,33 +67,21 @@ class CreateMission extends React.Component {
           });
     }
 
+
     componentDidMount() {
       this.props.refresh();  
     }
 
-    componentWillReceiveProps() {
+    componentWillReceiveProps(nextProps) {
       // console.log(this.props.author._id)
       // const newState = Object.assign({}, this.props, this.state); // right to left
       // this.setState(newState);
       if (this.props.author) {
-        debugger;
         this.fetchArcs();
       }
       
     }
-    // deleteMovie(id) {
-    //     fetch(`/api/movies/${id}`, {
-    //         method: 'DELETE'
-    //     })
-    //         .then(() => {
-    //             if (this.props.fetchMovies) {
-    //                 this.props.fetchMovies()
-    //             }
 
-
-    //         })
-
-    // };
     onUploadSuccess(success) {
         const url = success.filesUploaded[0].url;
         this.setState({
@@ -85,8 +104,23 @@ class CreateMission extends React.Component {
             },
             body: JSON.stringify(mission),
         })
-        .then(() => this.props.fetchMissions())
+        .then(() => this.fetchMissionsByArc(this.state.whichArc))
     }
+
+    fetchMissionsByArc(selectedArc) {
+      // 1. Fetch all the exist user arcs by a user's ID
+      
+      fetch(`/api/missions/${selectedArc}`, { credentials: 'include'})
+      .then((res) => res.json())
+      .then((missions) => {
+          // 2. Store them in the state
+          console.log(missions)
+          this.setState({
+              missions: missions,
+          });
+          
+      });
+  }
     saveMission(id) {
         const mission = Object.assign({}, this.state);
         delete mission.editing; // death to editing?
@@ -108,6 +142,8 @@ class CreateMission extends React.Component {
     _setArc(arc) {
       this.setState({
         whichArc: arc
+      },()=>{
+        this.fetchMissionsByArc(arc);
       })
     }
 
@@ -118,37 +154,59 @@ class CreateMission extends React.Component {
             <div >
               {this.props.loggedIn && this.state.arcs && (
                 <div>
-                      <ul>
-                        
-                        {this.state.arcs.map( arc => {
-                          return (<li 
-                            key={arc._id}
-                            onClick={ () => this._setArc(arc._id)}
-                            id={arc._id}> {arc.arcName}
-                          </li>)
-                          // add missions here later?
+                      
+                        {this.state.arcs.map((arc, index) => {
+                          return (
+                              <div key={index}>
+                                <input type="radio" id={`${index}-arc`}
+                                  key={arc._id}
+                                  onClick={ () => this._setArc(arc._id)}
+                                  value={arc._id}
+                                  name="available-arcs"
+                                /> 
+                                <label htmlFor={`${index}-arc`}>{arc.arcName}</label>
+                                {/* show mission difficulty here */}
+                                {/* show number of missions here */}
+                              </div>
+                          )
                         })}  
-                                             
+                      
+                      <ul className="missions">
+                        {this.state.missions ? 
+                          this.state.missions.map ((mission, index) =>{
+                            return <li key={index}> {mission.missionName}</li>
+                          })
+                          : 
+                          <div></div>
+                        }
                       </ul>
                       <fieldset>
-                          <label htmlFor="missionName">Mission Name: </label>
+                        <label htmlFor="missionName">Mission Name: </label>
+                        <input
+                            onChange={this.handleChange}
+                            type="text"
+                            name="missionName"
+                          value={this.state.missionName}
+                        />
+                      </fieldset>
+                      <fieldset className="theatre">
+                        <label htmlFor="description">Description </label>
                           <input
-                              onChange={this.handleChange}
+                              onChange={this.handleTheatreChange}
                               type="text"
-                              name="missionName"
-                            value={this.state.missionName}
+                              name="description"
+                            value={this.state.theatre.description}
                           />
                       </fieldset>
-                      <fieldset>
-                          <label htmlFor="campaign">Year: </label>
-                          <input  
-                              onChange={this.handleChange}
-                              type="text"
-                              name="whichCampaign"
-                              value={this.state.whichCampaign}
-                          />
+                      <fieldset className="the-sheep">
+                        
                       </fieldset>
-                      <button onClick={() => this.addMission()}>Save Changes</button>
+                      <fieldset className="the-wolves">
+                        
+                      </fieldset>
+                      
+                      
+                      <button onClick={() => this.addMission()}>Add Mission</button>
                   </div>
               )}  
             </div>

@@ -120,6 +120,7 @@ class ArcManagement extends React.Component {
     createArc(e) {
         e.preventDefault();
         const arc = Object.assign({}, this.state); // again right to left
+        
         arc.author = this.props.author._id;
         fetch('/api/arcs', {
             method: 'POST',
@@ -128,7 +129,13 @@ class ArcManagement extends React.Component {
                 'content-type': 'application/json'
             }
         })
-        .then(() => this.props.fetchArcs());
+        .then(() => this.props.fetchArcs())
+        .then(()=>{
+            let {isCreatingNewArc} = this.state;
+            this.setState({
+                isCreatingNewArc: !isCreatingNewArc
+            })
+        })
         // .then(() => this.props.fetchMissions()); // do i need this
     }
     createMission(e) {
