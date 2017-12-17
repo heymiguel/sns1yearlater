@@ -19,6 +19,26 @@ p{
     margin: 0;
 }
 
+fieldset{
+    border: 0;
+    label{
+        color: #b5b5b5;
+    }
+    .arcs{
+        display: flex;
+        div{
+            margin-right: 5px;
+        }
+        label{
+            opacity: .5;
+            background: #aa0025;
+        }
+    } 
+    .large{
+
+    }
+}
+
 body{
     background: #1e1e1e;
     color: #b5b5b5;
@@ -34,8 +54,21 @@ input, textarea{
     font-family: 'Rokkitt', serif;
 }
 
+textarea{
+    width: 40%;
+}
+
 input[type="password"]{
     font-family: 'Rokkitt', serif;
+}
+input[type="radio"]{
+    display: none;
+    &:checked + label{
+        background: #aa0025;
+        opacity: 1;
+        color: #ffffff;
+        border: 2px solid #aa0025;
+    }
 }
 
 button{
@@ -116,18 +149,20 @@ li{
 .arc-list{
     ul{
         display: flex;
-
+        flex-direction: column;
+        flex-wrap: wrap;
         li {
             width: 35%;
             list-style: none;
             background-color: #dee1e5;
-            margin-right: 5px;
+            margin-bottom: 15px;
         }
-
     }
 
-    
-
+    a {
+        font-size: 12px;
+        
+    }
     .arc-header{
         display: flex;
         justify-content: space-between;
@@ -196,6 +231,58 @@ li{
             color: #000000;
             padding: 5px;
             margin-bottom: 5px;
+        }
+    }
+}
+
+.create-mission{
+    h3{
+        border-bottom: 2px solid #b5b5b5;
+        width: 200px;
+    }
+    .form-row{
+        margin-bottom: 30px;
+    }
+    .difficulty-selector{
+        display: flex;
+        align-items: center;
+        label{
+            opacity: .5;
+            background: #aa0025;
+            padding: 10px;
+        }
+        div{
+            margin-right: 5px;
+        }
+        span{
+            margin-right: 25px;
+            font-size: 14px;
+        }
+    }
+    .theatre, .the-sheep, .the-wolves{
+        label{
+            display: block;
+        }
+    }
+
+    .the-wolves{
+        label{
+            opacity: .5;
+            background: #b5b5b5;
+            padding: 5px;
+            margin-right: 5px;
+        }
+        .factions{
+            display: flex;
+        }
+
+        label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+            opacity: 1;
+            border:2px solid #f00;
+          }
+
+        img{
+            width: 50px;
         }
     }
 }

@@ -191,20 +191,25 @@ class ArcManagement extends React.Component {
                                 </li>
                             </ul>
                             
-                            {/* missionList */}
-                            {(this.state.missions.length > 0) && (
-                                <div className="mission-list">
-                                    <h3>{this.state.arcName}</h3>
-                                    <div className="existing-missions">
-                                        <MissionList missions={this.state.missions} />
-                                    </div>   
-                                </div>
+                            {(this.state.missions.length <= 0) && (
+                                <a href="/createmission"> Add new mission </a>
                             )}
-                            
-                            
-                            
+                            {/* missionList */}
+                                
+                                <div className="mission-list">
+                                    {(this.state.missions.length > 0) && (
+                                    <div> 
+                                        <h3>{this.state.arcName}</h3>
+                                        <div className="existing-missions">
+                                            <MissionList missions={this.state.missions} />
+                                        </div>
+                                    </div>   
+                                    )}
+                                </div>
+                        
                         </div>  
                     }
+                    {/* <a href="/createmission"> Add new mission </a> */}
                 </div> 
             </div>
         );

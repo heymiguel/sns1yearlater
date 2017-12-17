@@ -405,6 +405,18 @@ h1, h2, h3, h4, h5, h6 {
 p {
   margin: 0; }
 
+fieldset {
+  border: 0; }
+  fieldset label {
+    color: #b5b5b5; }
+  fieldset .arcs {
+    display: flex; }
+    fieldset .arcs div {
+      margin-right: 5px; }
+    fieldset .arcs label {
+      opacity: .5;
+      background: #aa0025; }
+
 body {
   background: #1e1e1e;
   color: #b5b5b5;
@@ -418,8 +430,19 @@ input, textarea {
   color: #b5b5b5;
   font-family: 'Rokkitt', serif; }
 
+textarea {
+  width: 40%; }
+
 input[type="password"] {
   font-family: 'Rokkitt', serif; }
+
+input[type="radio"] {
+  display: none; }
+  input[type="radio"]:checked + label {
+    background: #aa0025;
+    opacity: 1;
+    color: #ffffff;
+    border: 2px solid #aa0025; }
 
 button {
   background: #aa0025;
@@ -479,12 +502,17 @@ li {
   font-size: 22px; }
 
 .arc-list ul {
-  display: flex; }
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap; }
   .arc-list ul li {
     width: 35%;
     list-style: none;
     background-color: #dee1e5;
-    margin-right: 5px; }
+    margin-bottom: 15px; }
+
+.arc-list a {
+  font-size: 12px; }
 
 .arc-list .arc-header {
   display: flex;
@@ -536,3 +564,43 @@ li {
     color: #000000;
     padding: 5px;
     margin-bottom: 5px; }
+
+.create-mission h3 {
+  border-bottom: 2px solid #b5b5b5;
+  width: 200px; }
+
+.create-mission .form-row {
+  margin-bottom: 30px; }
+
+.create-mission .difficulty-selector {
+  display: flex;
+  align-items: center; }
+  .create-mission .difficulty-selector label {
+    opacity: .5;
+    background: #aa0025;
+    padding: 10px; }
+  .create-mission .difficulty-selector div {
+    margin-right: 5px; }
+  .create-mission .difficulty-selector span {
+    margin-right: 25px;
+    font-size: 14px; }
+
+.create-mission .theatre label, .create-mission .the-sheep label, .create-mission .the-wolves label {
+  display: block; }
+
+.create-mission .the-wolves label {
+  opacity: .5;
+  background: #b5b5b5;
+  padding: 5px;
+  margin-right: 5px; }
+
+.create-mission .the-wolves .factions {
+  display: flex; }
+
+.create-mission .the-wolves label > input:checked + img {
+  /* (RADIO CHECKED) IMAGE STYLES */
+  opacity: 1;
+  border: 2px solid #f00; }
+
+.create-mission .the-wolves img {
+  width: 50px; }
